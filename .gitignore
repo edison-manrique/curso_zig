@@ -1,0 +1,7 @@
+# Ignore compiled binaries
+*.exe
+*.pdb
+
+# Ignore temporary/OS files
+.DS_Store
+Thumbs.db
