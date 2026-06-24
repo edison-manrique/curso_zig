@@ -9,7 +9,7 @@
 // DESCRIPCION:
 // Zig tiene el Testing integrado directamente en el lenguaje. No necesitas frameworks
 // externos (como Jest, JUnit o GoogleTest). El compilador mismo actua como el test runner.
-// Esta guia exhaustiva (+1000 lineas) te llevara desde las aserciones mas basicas hasta
+// Esta guia exhaustiva (+500 lineas) te llevara desde las aserciones mas basicas hasta
 // la deteccion de fugas de memoria (Memory Leaks), simulacion (Mocking), Doctests y
 // la creacion de proyectos listos para produccion probados al 100%.
 //
