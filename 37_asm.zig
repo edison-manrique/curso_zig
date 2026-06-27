@@ -9,9 +9,9 @@
 //
 // INSTRUCCIONES DE USO:
 // 1. Para leer el manual explicativo en consola:
-//      $ zig run masterclass_assembly_v2.zig
+//      $ zig run 37_asm.zig
 // 2. Para correr la suite completa de pruebas de CPU:
-//      $ zig test masterclass_assembly_v2.zig
+//      $ zig test 37_asm.zig
 //
 // =========================================================================================
 // TABLA DE CONTENIDO (MÓDULOS DE APRENDIZAJE):
