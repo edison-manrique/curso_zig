@@ -37,8 +37,8 @@ const expect = std.testing.expect;
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
-    // Buffer de gran tamaño para albergar el curso de forma segura en memoria
-    var buffer: [131072]u8 = undefined;
+    // Buffer para albergar el curso de forma segura en memoria
+    var buffer: [512]u8 = undefined;
     var stdout_impl = std.Io.File.stdout().writer(io, &buffer);
     const stdout = &stdout_impl.interface;
 
@@ -62,7 +62,7 @@ fn printStatic(writer: anytype, comptime text: []const u8) !void {
 }
 
 // =========================================================================================
-// [MODULO 1] ANATOMÍA DE LA ARQUITECTURA x86_64 Y SINTAXIS AT&T
+// [MODULO 1] ANATOMIA DE LA ARQUITECTURA x86_64 Y SINTAXIS AT&T
 // =========================================================================================
 // El procesador x86_64 posee 16 registros de propósito general de 64 bits:
 // RAX, RBX, RCX, RDX, RSI, RDI, RBP, RSP, R8, R9, R10, R11, R12, R13, R14, R15.
@@ -118,7 +118,7 @@ fn ejecutarModulo1(stdout: anytype) !void {
     try printStatic(stdout,
         \\
         \\====================================================================
-        \\ [MODULO 1] ANATOMÍA DE LA ARQUITECTURA x86_64 Y SINTAXIS AT&T
+        \\ [MODULO 1] ANATOMIA DE LA ARQUITECTURA x86_64 Y SINTAXIS AT&T
         \\====================================================================
         \\ * x86_64 cuenta con 16 registros de proposito general de 64 bits.
         \\ * Zig utiliza el compilador LLVM, el cual emplea por defecto la 
@@ -521,7 +521,7 @@ fn ejecutarModulo7(stdout: anytype) !void {
 }
 
 // =========================================================================================
-// [MODULO 8] PROYECTO PRÁCTICO: MEMSET OPTIMIZADO A NIVEL DE CPU
+// [MODULO 8] PROYECTO PRACTICO: MEMSET OPTIMIZADO A NIVEL DE CPU
 // =========================================================================================
 // Como proyecto integrador, implementaremos nuestra propia version ultra-rapida de
 // la funcion `memset` (llenar un bloque de memoria con un byte especifico).
@@ -576,7 +576,7 @@ fn ejecutarModulo8(stdout: anytype) !void {
     try printStatic(stdout,
         \\
         \\====================================================================
-        \\ [MODULO 8] PROYECTO PRÁCTICO (MEMSET DE HARDWARE)
+        \\ [MODULO 8] PROYECTO PRACTICO (MEMSET DE HARDWARE)
         \\====================================================================
         \\ * Hemos integrado los conceptos de constraints, clobbers y volatile.
         \\ * La instruccion `rep stosb` de la CPU permite reescribir la memoria RAM
