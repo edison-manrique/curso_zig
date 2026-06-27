@@ -616,11 +616,11 @@ fn imprimirCierre(stdout: anytype) !void {
         \\
         \\ Pasos siguientes recomendados:
         \\ 1. Ejecuta la suite de pruebas nativas:
-        \\    $ zig test masterclass_assembly_v2.zig
+        \\    $ zig test 37_asm.zig
         \\
         \\ 2. Inspecciona el codigo ensamblador generado directamente por el 
         \\    compilador de Zig ejecutando:
-        \\    $ zig build-exe masterclass_assembly_v2.zig --emit asm
+        \\    $ zig build-exe 37_asm.zig --emit asm
         \\====================================================================
         \\
     );
