@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 7: RESULT LOCATION SEMANTICS (EDICION ZIG 0.16)
+// MASTERCLASS 40: RESULT LOCATION SEMANTICS (EDICION ZIG 0.16)
 // =========================================================================
 
 // En Zig, la inferencia de tipos y la asignacion de memoria no son detalles
