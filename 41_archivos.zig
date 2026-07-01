@@ -1,8 +1,8 @@
 // =========================================================================
-// MASTERCLASS 8: TRABAJO CON ARCHIVOS Y EL NUEVO std.Io (EDICION ZIG 0.16)
+// MASTERCLASS 41: TRABAJO CON ARCHIVOS Y EL NUEVO std.Io (EDICION ZIG 0.16)
 // =========================================================================
 
-// En Zig 0.16, todo el sistema de entrada/salida (I/O) fue completamente 
+// En Zig 0.16, todo el sistema de entrada/salida (I/O) fue completamente
 // redisenado para alinearse con la filosofia explicita de los Allocators.
 // Se elimino el antiguo 'std.fs' global para dar paso al modulo 'std.Io'.
 //
@@ -57,7 +57,7 @@ fn modulo1CreacionYEscritura(stdout: anytype, io: std.Io) !void {
 
     // createFile requiere el backend 'io', la ruta y opciones adicionales.
     const file = try cwd.createFile(io, "temp_masterclass.txt", .{});
-    
+
     // Es indispensable cerrar el archivo al finalizar el bloque para liberar descriptores.
     // En el nuevo std.Io, el metodo close() tambien requiere el parametro 'io'.
     defer file.close(io);
@@ -78,7 +78,7 @@ fn modulo2LecturaCompleta(stdout: anytype, io: std.Io, gpa: std.mem.Allocator) !
     try stdout.print(">> Modulo 2: Lectura Completa (Heap Allocation)\n", .{});
 
     const cwd = std.Io.Dir.cwd();
-    
+
     // Abrimos el archivo en modo de solo lectura (comportamiento por defecto).
     const file = try cwd.openFile(io, "temp_masterclass.txt", .{});
     defer file.close(io);
@@ -108,17 +108,17 @@ fn modulo3GestionDeErrores(stdout: anytype, io: std.Io) !void {
     try stdout.print(">> Modulo 3: Gestion de Errores (FileNotFound)\n", .{});
 
     const cwd = std.Io.Dir.cwd();
-    
+
     // Zig fomenta que los errores sean tratados como valores normales del sistema.
     // Aqui intentamos abrir un archivo que no existe de forma controlada.
     const intento = cwd.openFile(io, "archivo_que_no_existe.txt", .{});
-    
+
     if (intento) |file| {
         defer file.close(io);
         try stdout.print("  Inesperado: Se abrio el archivo.\n", .{});
     } else |err| {
         try stdout.print("  Exito: Error capturado correctamente -> {s}\n", .{@errorName(err)});
-        
+
         // Podemos ramificar nuestra logica dependiendo del error especifico devuelto por el S.O.
         if (err == error.FileNotFound) {
             try stdout.print("  (El sistema identifico con precision la ausencia del recurso)\n", .{});
@@ -137,7 +137,7 @@ fn modulo4DirectoriosEIteracion(stdout: anytype, io: std.Io) !void {
 
     // Creamos un directorio temporal usando las banderas estandar del sistema.
     try cwd.createDir(io, "temp_dir_masterclass", .default_dir);
-    
+
     // Abrimos el directorio recien creado.
     // IMPORTANTE: .iterate = true es requerido si planeamos listar sus elementos internos.
     const dir_ref = try cwd.openDir(io, "temp_dir_masterclass", .{ .iterate = true });
@@ -152,7 +152,7 @@ fn modulo4DirectoriosEIteracion(stdout: anytype, io: std.Io) !void {
     // Obtenemos un iterador optimizado.
     // El iterador de Zig lee de forma perezosa (lazy) sin reservar memoria dinamica.
     var iterador = dir_ref.iterate();
-    
+
     try stdout.print("  Listando elementos dentro de 'temp_dir_masterclass':\n", .{});
     while (try iterador.next(io)) |entrada| {
         // entrada.name contiene el slice con el nombre del elemento.
@@ -178,10 +178,10 @@ fn modulo5Limpieza(stdout: anytype, io: std.Io) !void {
     // 2. Para borrar un directorio, primero debemos limpiar su contenido interno.
     // Los sistemas operativos no permiten remover carpetas que no esten vacias.
     const dir_ref = try cwd.openDir(io, "temp_dir_masterclass", .{});
-    
+
     dir_ref.deleteFile(io, "archivo_a.log") catch {};
     dir_ref.deleteFile(io, "archivo_b.log") catch {};
-    
+
     // Cerramos el handler de la carpeta para que el S.O. no la bloquee durante el borrado.
     dir_ref.close(io);
 
