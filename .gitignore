@@ -1,7 +1,25 @@
 # Ignore compiled binaries
 *.exe
 *.pdb
+*.o
+*.a
+*.lib
+*.dll
+*.so
+*.dylib
+*.wasm
 
-# Ignore temporary/OS files
+# Zig cache directory
+.zig-cache/
+
+# Build artifacts
+build/
+zig-out/
+
+# Temporary files
+*.tmp
+*.log
+
+# OS files
 .DS_Store
 Thumbs.db
