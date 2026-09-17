@@ -1,7 +1,9 @@
 // =========================================================================================
-// BUILTINS ATOMICOS - FENCE (@fence)
+// BUILTINS ATOMICOS - FENCE (Barreras de Memoria)
 // =========================================================================================
 // Barrera de memoria para ordenar operaciones atomicas.
+// En Zig 0.16.0, no existe std.atomic.fence ni @fence directamente.
+// Se usa @atomicRmw con operacion Noop para simular el efecto de fence.
 // =========================================================================================
 
 const std = @import("std");
@@ -15,19 +17,19 @@ pub fn main(init: std.process.Init) !void {
     
     defer stdout.flush() catch {};
     
-    try stdout.print(">>> Builtins Atomicos: @fence (Barrera de Memoria)\n\n", .{});
+    try stdout.print(">>> Builtins Atomicos: Barreras de Memoria (simuladas)\n\n", .{});
     
     var dato: u32 = 0;
     
-    // Barrera acquire antes de leer
-    @fence(.acquire);
+    // En Zig 0.16.0, usamos @atomicRmw con operacion Noop para simular fence acquire
+    _ = @atomicRmw(u32, &dato, .Add, 0, .acquire);
     const valor = dato;
     
-    // Barrera release despues de escribir
+    // Barrera release usando atomicRmw con operacion Noop
     dato = 42;
-    @fence(.release);
+    _ = @atomicRmw(u32, &dato, .Add, 0, .release);
     
-    try stdout.print("  Barreras aplicadas correctamente. Valor={d}\n\n", .{valor});
+    try stdout.print("  Barreras aplicadas correctamente via atomicRmw. Valor={d}\n\n", .{valor});
     
     try stdout.print(">>> Ejecucion completada exitosamente!\n", .{});
 }

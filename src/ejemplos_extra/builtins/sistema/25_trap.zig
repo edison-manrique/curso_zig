@@ -20,11 +20,19 @@ pub fn main(init: std.process.Init) !void {
     try stdout.print("  @trap: instruccion de parada irreversible (protegida)\n", .{});
     try stdout.print("  @panic: manejador de fallos con stack trace (protegido)\n\n", .{});
     
-    // Protegidos para no abortar la ejecucion
-    if (false) {
-        @trap();
-        @panic("Error critico");
-    }
+    // Protegidos para no abortar la ejecucion - usamos una funcion separada
+    // que nunca se llama
+    _ = demostrarTrap; // Solo referenciamos la funcion
     
     try stdout.print(">>> Ejecucion completada exitosamente!\n", .{});
+}
+
+fn demostrarTrap() noreturn {
+    // Este codigo nunca se ejecuta, solo para demostracion
+    @trap();
+}
+
+fn demostrarPanic() noreturn {
+    // Este codigo nunca se ejecuta, solo para demostracion  
+    @panic("Error critico");
 }
