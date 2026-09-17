@@ -66,6 +66,7 @@ pub fn build(b: *std.Build) void {
         .{ .path = "src/ejemplos_extra/builtins/sistema/26_unreachable.zig", .name = "builtin_26_unreachable", .link_libc = false },
         .{ .path = "src/ejemplos_extra/builtins/sistema/27_compile_time.zig", .name = "builtin_27_compile_time", .link_libc = false },
         // Ejemplos Extra
+        .{ .path = "src/ejemplos_extra/28_medicion_tiempo.zig", .name = "28_medicion_tiempo", .link_libc = false },
         .{ .path = "src/nivel_2_intermedio/33_formato.zig", .name = "33_formato", .link_libc = false },
         .{ .path = "src/ejemplos_extra/34_tiempo.zig", .name = "34_tiempo", .link_libc = false },
         .{ .path = "src/ejemplos_extra/35_bitwise.zig", .name = "35_bitwise", .link_libc = false },
