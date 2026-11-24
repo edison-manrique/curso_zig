@@ -1,8 +1,8 @@
 // =========================================================================================
-// THE ZIG 0.16.0 MASTERCLASS: ENSAMBLADOR x86_64 PARA WINDOWS Y LINUX (EDICION ULTRA)
+// THE ZIG 0.17.0 MASTERCLASS: ENSAMBLADOR x86_64 PARA WINDOWS Y LINUX (EDICION ULTRA)
 // =========================================================================================
 //
-// Versión de Zig: 0.16.0 (Juicy Main Edition)
+// Versión de Zig: 0.17.0 (Juicy Main Edition)
 // Arquitectura Objetivo: x86_64 (Intel / AMD)
 // Sistemas Operativos: Windows (Microsoft x64 ABI) & Linux (System V AMD64 ABI)
 // Sintaxis utilizada por el backend: AT&T (vía LLVM)
@@ -32,7 +32,7 @@ const expectEqual = std.testing.expectEqual;
 const expect = std.testing.expect;
 
 // =========================================================================================
-// ENTRY POINT (ZIG 0.16.0 "JUICY MAIN" I/O ENGINE)
+// ENTRY POINT (ZIG 0.17.0 "JUICY MAIN" I/O ENGINE)
 // =========================================================================================
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
@@ -562,7 +562,7 @@ fn memsetRapido(destino: []u8, valor: u8) void {
 }
 
 test "Modulo 8: Validando memset optimizado de hardware" {
-    var buffer_prueba = [_]u8{1} ** 256;
+    var buffer_prueba: [256]u8 = @splat(1);
 
     // Llenamos el buffer de prueba con el byte 0xAA (170 en decimal)
     memsetRapido(&buffer_prueba, 0xAA);
@@ -598,7 +598,7 @@ fn imprimirCabecera(stdout: anytype) !void {
         \\     / / | | (_ |   / _ \ __ \ |\/| |
         \\    /___|___\___|  /_/ \_\___/_|  |_|
         \\                                                            
-        \\    MASTERCLASS COMPLETA: ENSAMBLADOR x86_64 EN ZIG 0.16.0
+        \\    MASTERCLASS COMPLETA: ENSAMBLADOR x86_64 EN ZIG 0.17.0
         \\====================================================================
         \\ Este archivo se ha compilado exitosamente. A continuacion, se presenta
         \\ el analisis interactivo directo de tu procesador fisico actual:
@@ -612,7 +612,7 @@ fn imprimirCierre(stdout: anytype) !void {
         \\====================================================================
         \\ [ANALISIS FINALIZADO CON EXITO]
         \\====================================================================
-        \\ Has completado la inmersion practica de Ensamblador en Zig 0.16.0.
+        \\ Has completado la inmersion practica de Ensamblador en Zig 0.17.0.
         \\
         \\ Pasos siguientes recomendados:
         \\ 1. Ejecuta la suite de pruebas nativas:

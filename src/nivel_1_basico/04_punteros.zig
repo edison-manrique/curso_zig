@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 4: PUNTEROS, MEMORIA Y ALINEACION (EDICION ZIG 0.16.0)
+// MASTERCLASS 4: PUNTEROS, MEMORIA Y ALINEACION (EDICION ZIG 0.17.0)
 // =========================================================================
 
 // En Zig no existen referencias ocultas, todo paso por referencia se hace
@@ -16,7 +16,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main" - Entrada explicita
+// ZIG 0.17.0: "Juicy Main" - Entrada explicita
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 

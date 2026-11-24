@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 5: ESTRUCTURAS, TUPLAS Y CONTROL DE BITS (EDICION ZIG 0.16)
+// MASTERCLASS 5: ESTRUCTURAS, TUPLAS Y CONTROL DE BITS (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, el "struct" es la base de toda abstraccion. No hay "class", no
@@ -17,7 +17,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -159,8 +159,8 @@ fn modulo4TuplasYAnonimos(stdout: anytype) !void {
     try procesarAnonimo(stdout, .{ .numero = 10, .estado = true, .mensaje = "Hola" });
 
     // 2. Tuplas (Structs anonimos sin nombre de campo, indexados con 0, 1, 2...)
-    // Soportan operadores de arreglos como ++ (concatenar) y ** (repetir)
-    const mi_tupla = .{ @as(u32, 100), true } ++ .{"Zig"} ** 2;
+    // Soportan concatenacion con ++ (en Zig 0.17.0 se eliminó **)
+    const mi_tupla = .{ @as(u32, 100), true } ++ .{ "Zig", "Zig" };
 
     try stdout.print("  [Tupla Generada]: Longitud {d}, Elemento 0: {d}, Elemento 2: {s}\n", .{ mi_tupla.len, mi_tupla[0], mi_tupla.@"2" });
 

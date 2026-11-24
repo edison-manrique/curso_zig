@@ -1,6 +1,6 @@
 // =========================================================================
 //           MASTERCLASS: OPERADORES Y PRECEDENCIA EN ZIG
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como la guia de referencia definitiva
 // para dominar los operadores matematicos, de bits, de desempaquetado,
@@ -228,9 +228,9 @@ fn modulo5ArreglosYPunteros() void {
     const fusionado = arr1 ++ arr2;
     print("  Concatenacion (arr1 ++ arr2): {any}\n", .{fusionado});
 
-    // 2. MULTIPLICACION DE ARREGLOS (**)
-    const patron = "Hi! " ** 3;
-    print("  Multiplicacion de String ('Hi! ' ** 3): '{s}'\n", .{patron});
+    // 2. REPETICION DE ARREGLOS (@splat en Zig 0.17.0, reemplaza a **)
+    const ceros: [4]u8 = @splat(0);
+    print("  Repeticion con @splat(0): {any}\n", .{ceros});
 
     // 3. DIRECCIONAMIENTO (&) Y DESREFERENCIACION (.*)
     const numero: u32 = 999;

@@ -1,8 +1,8 @@
 // =========================================================================================
-// THE ZIG 0.16.0 MASTERCLASS: COMPILACIÓN Y DESARROLLO PARA WEBASSEMBLY (WASM)
+// THE ZIG 0.17.0 MASTERCLASS: COMPILACIÓN Y DESARROLLO PARA WEBASSEMBLY (WASM)
 // =========================================================================================
 //
-// Versión de Zig: 0.16.0 (Juicy Main Edition)
+// Versión de Zig: 0.17.0 (Juicy Main Edition)
 // Plataformas Objetivo: wasm32-freestanding (Web/Node.js) & wasm32-wasi (Entornos de Servidor)
 //
 // DESCRIPCION:
@@ -38,7 +38,7 @@ const expectEqual = std.testing.expectEqual;
 const expect = std.testing.expect;
 
 // =========================================================================================
-// ENTRY POINT (ZIG 0.16.0 I/O ENGINE)
+// ENTRY POINT (ZIG 0.17.0 I/O ENGINE)
 // =========================================================================================
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
@@ -196,7 +196,7 @@ fn ejecutarModulo2(stdout: anytype) !void {
 // WASI (WebAssembly System Interface) define un estándar para que WebAssembly interactúe
 // con recursos del sistema de manera segura (fuera del navegador).
 //
-// En Zig 0.16.0, el acceso a los argumentos pasados al binario de WASI se realiza
+// En Zig 0.17.0, el acceso a los argumentos pasados al binario de WASI se realiza
 // a través del objeto `std.process.Init` que recibe la función `main`.
 // Esto unifica la forma en que los argumentos se recuperan tanto de forma nativa como
 // bajo el estándar WASI.
@@ -229,7 +229,7 @@ fn ejecutarModulo3(stdout: anytype) !void {
         \\====================================================================
         \\ * WASI permite ejecutar codigo WebAssembly con acceso controlado a recursos
         \\   del host (archivos, argumentos, entorno, etc.).
-        \\ * En Zig 0.16.0, se utiliza `init.minimal.args.toSlice` en la funcion `main`
+        \\ * En Zig 0.17.0, se utiliza `init.minimal.args.toSlice` en la funcion `main`
         \\   para leer los argumentos.
         \\
         \\   Ejemplo de ejecucion en servidor:
@@ -247,7 +247,7 @@ fn ejecutarModulo3(stdout: anytype) !void {
 // duro por defecto. Los directorios accesibles deben ser explícitamente "pre-abiertos"
 // por el host en tiempo de ejecución.
 //
-// En la API de Zig 0.16.0, el mapa de directorios preabiertos está disponible mediante
+// En la API de Zig 0.17.0, el mapa de directorios preabiertos está disponible mediante
 // `init.preopens.map`. Podemos iterar sobre este mapa para consultar qué directorios
 // físicos del disco han sido expuestos al entorno aislado de WebAssembly.
 
@@ -273,7 +273,7 @@ fn ejecutarModulo4(stdout: anytype) !void {
         \\====================================================================
         \\ * WASI implementa seguridad basada en capacidades. Un binario WebAssembly
         \\   solo puede ver directorios compartidos explicitamente (Preopens).
-        \\ * En Zig 0.16.0, la lista se recupera mediante `init.preopens.map.keys()`.
+        \\ * En Zig 0.17.0, la lista se recupera mediante `init.preopens.map.keys()`.
         \\ * Intentar abrir directorios que no estan en esta lista retornara un error
         \\   del tipo `AccessDenied` administrado por la sandbox de WASI.
         \\
@@ -558,7 +558,7 @@ fn imprimirCabecera(stdout: anytype) !void {
         \\     / / | | (_ |    \ \/\/ / / _ \\__ \ |\/| |
         \\    /___|___\___|     \_/\_/ /_/ \_\___/_|  |_|
         \\                                                            
-        \\    MASTERCLASS COMPLETA: WEBASSEMBLY (WASM) EN ZIG 0.16.0
+        \\    MASTERCLASS COMPLETA: WEBASSEMBLY (WASM) EN ZIG 0.17.0
         \\====================================================================
         \\ Este archivo se ha compilado y ejecutado exitosamente en tu maquina.
         \\ A continuacion se presenta la informacion del curso interactivo:

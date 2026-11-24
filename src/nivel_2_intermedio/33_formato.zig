@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: FORMATEO AVANZADO (std.fmt) - ZIG 0.16.0 (ASCII 7-BIT)
+// MASTERCLASS: FORMATEO AVANZADO (std.fmt) - ZIG 0.17.0 (ASCII 7-BIT)
 // =========================================================================
 //
 // Filosofia del Formateo en Zig:
@@ -14,7 +14,7 @@
 // 2. Gramatica Visual: Alineacion, Relleno, Ancho y Precision.
 // 3. Parametros Dinamicos en Runtime (El por que de las limitaciones).
 // 4. Especificadores Nativos (Slices Hex con x, tamanos con B/Bi, Durations con f).
-// 5. Formateadores Personalizados: Implementando 'pub fn format' (Zig 0.16.0 API).
+// 5. Formateadores Personalizados: Implementando 'pub fn format' (Zig 0.17.0 API).
 // 6. Seguridad y Redaccion: Ocultar contrasenas y secrets en logs.
 // 7. Formateo sin Heap (Zero-Allocation): Writer.fixed y buffers de pila.
 // 8. Formateo en Tiempo de Compilacion: std.fmt.comptimePrint.
@@ -22,7 +22,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -130,10 +130,10 @@ fn modulo_3_DinamismoEnRuntime(stdout: *std.Io.Writer) !void {
 }
 
 // =========================================================================
-// MODULO 4: ESPECIFICADORES NATIVOS Y BUILT-INS DE ZIG 0.16.0
+// MODULO 4: ESPECIFICADORES NATIVOS Y BUILT-INS DE ZIG 0.17.0
 // =========================================================================
 fn modulo_4_EspecificadoresDeZig(stdout: *std.Io.Writer) !void {
-    try stdout.print(">> Modulo 4: Especificadores Basicos e Introspeccion de Zig 0.16.0\n", .{});
+    try stdout.print(">> Modulo 4: Especificadores Basicos e Introspeccion de Zig 0.17.0\n", .{});
 
     const num: u32 = 255;
 
@@ -145,7 +145,7 @@ fn modulo_4_EspecificadoresDeZig(stdout: *std.Io.Writer) !void {
     try stdout.print("  Cientifico       : {e}\n", .{@as(f32, 100000)}); // 1e5
     try stdout.print("  Puntero RAM      : {*}\n", .{&num}); // Direccion RAM
 
-    // ESPECIFICADORES DE ZIG 0.16.0:
+    // ESPECIFICADORES DE ZIG 0.17.0:
     // 1. Slices de Bytes a Hexadecimal Directo (Reemplaza std.fmt.fmtSliceHexLower)
     const array_bytes = [_]u8{ 0xDE, 0xAD, 0xBE, 0xEF };
     try stdout.print("  Slice Hex Nativo : {x}\n", .{&array_bytes}); // deadbeef
@@ -166,9 +166,9 @@ fn modulo_4_EspecificadoresDeZig(stdout: *std.Io.Writer) !void {
 }
 
 // =========================================================================
-// MODULO 5: FORMATEADORES PERSONALIZADOS (METODO FORMAT - ZIG 0.16.0 API)
+// MODULO 5: FORMATEADORES PERSONALIZADOS (METODO FORMAT - ZIG 0.17.0 API)
 // =========================================================================
-// En Zig 0.16.0, para crear un formateador personalizado para tu struct,
+// En Zig 0.17.0, para crear un formateador personalizado para tu struct,
 // simplemente defines una funcion publica 'format' que recibe un puntero a
 // la interfaz de salida '*std.Io.Writer'.
 
@@ -178,7 +178,7 @@ const DireccionIP = struct {
     c: u8,
     d: u8,
 
-    // Firma estandarizada en Zig 0.16.0
+    // Firma estandarizada en Zig 0.17.0
     pub fn format(
         self: @This(),
         writer: *std.Io.Writer,
@@ -192,7 +192,7 @@ fn modulo_5_FormateadoresPersonalizados(stdout: *std.Io.Writer) !void {
 
     const ip = DireccionIP{ .a = 192, .b = 168, .c = 1, .d = 1 };
 
-    // En Zig 0.16.0, el especificador {f} es obligatorio para delegar
+    // En Zig 0.17.0, el especificador {f} es obligatorio para delegar
     // la operacion al metodo format de una estructura.
     try stdout.print("  [Custom Format] IP detectada: {f}\n\n", .{ip});
 }
@@ -232,10 +232,10 @@ fn modulo_6_RedaccionYSeguridad(stdout: *std.Io.Writer) !void {
 }
 
 // =========================================================================
-// MODULO 7: ZERO-ALLOCATION EN BUFFERS (ZIG 0.16.0 FIXED WRITERS)
+// MODULO 7: ZERO-ALLOCATION EN BUFFERS (ZIG 0.17.0 FIXED WRITERS)
 // =========================================================================
 // SOLUCION DE ZIG: Formatear directamente en buffers estaticos sobre la pila (Stack).
-// En Zig 0.16.0, 'FixedBufferStream' ha sido removido. Ahora inicializamos un
+// En Zig 0.17.0, 'FixedBufferStream' ha sido removido. Ahora inicializamos un
 // escritor directamente sobre la pila usando 'std.Io.Writer.fixed'.
 
 fn modulo_7_ZeroAllocationBuffers(stdout: *std.Io.Writer) !void {
@@ -272,7 +272,7 @@ fn modulo_8_FormateoEnComptime(stdout: *std.Io.Writer) !void {
 
     // std.fmt.comptimePrint genera un string literal definitivo en el ejecutable,
     // eliminando por completo el procesamiento en tiempo de ejecucion.
-    const compilacion_meta = std.fmt.comptimePrint("Compilado en: {s}, Version: {d}", .{ "Zig", @as(f32, 0.16) });
+    const compilacion_meta = std.fmt.comptimePrint("Compilado en: {s}, Version: {d}", .{ "Zig", @as(f32, 0.17) });
 
     try stdout.print("  [Comptime Print] {s}\n\n", .{compilacion_meta});
 }
@@ -288,7 +288,7 @@ fn imprimirCabecera(stdout: *std.Io.Writer) !void {
         \\    | _ \ |_| || || |__| |  | || .` \__ \
         \\    |___/\___/|___|____|_| |___|_|\_|___/
         \\                                                            
-        \\    MASTERCLASS 17: ADVANCED FORMATTING (ZIG 0.16.0)
+        \\    MASTERCLASS 17: ADVANCED FORMATTING (ZIG 0.17.0)
         \\====================================================================
         \\
     , .{});
@@ -299,7 +299,7 @@ fn imprimirCierre(stdout: *std.Io.Writer) !void {
         \\====================================================================
         \\ RESUMEN DE RENDIMIENTO DE FORMATEO:
         \\ - Zig no tiene sobrecostos ocultos, toda la sintaxis se valida en comptime.
-        \\ - Con la API de Zig 0.16.0, las interfaces de I/O son mas eficientes.
+        \\ - Con la API de Zig 0.17.0, las interfaces de I/O son mas eficientes.
         \\ - El uso de Writer.fixed erradica la fragmentacion de memoria.
         \\====================================================================
         \\

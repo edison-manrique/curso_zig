@@ -1,10 +1,10 @@
 // =========================================================================
 //           MASTERCLASS: CONCURRENCIA, HILOS Y SINCRONIZACION
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como la guia definitiva escrita por
 // expertos en sistemas para dominar la ejecucion multihilo en el nuevo
-// ecosistema de Zig 0.16.0 (La revolucion del asincronismo y std.Io).
+// ecosistema de Zig 0.17.0 (La revolucion del asincronismo y std.Io).
 //
 // NOTA DE COMPATIBILIDAD: Todo el codigo, graficos ASCII y explicaciones
 // estan limitados estrictamente a la codificacion ASCII de 7 bits (rango 0-127)
@@ -42,29 +42,29 @@
 // 8. MODULO 7: HILOS DEMONIOS (FIRE-AND-FORGET)
 //    8.1 Sustitucion de Thread Pools usando spawn + detach
 //
-// 9. CONCLUSIONES Y REGLAS DE ORO EN ZIG 0.16
+// 9. CONCLUSIONES Y REGLAS DE ORO EN ZIG 0.17
 
 const std = @import("std");
 
 // =========================================================================
-// 1. INTRODUCCION: LA REVOLUCION "STD.IO" EN ZIG 0.16
+// 1. INTRODUCCION: LA REVOLUCION "STD.IO" EN ZIG 0.17
 // =========================================================================
 // En versiones antiguas, escribiamos `std.Thread.Mutex` y
 // imprimiamos con `std.fs.File`. Tambien dormiamos con `std.time.sleep`.
 //
-// En Zig 0.16.0, el nucleo de Zig sufrio un refactor masivo arquitectonico.
+// En Zig 0.17.0, el nucleo de Zig sufrio un refactor masivo arquitectonico.
 // Se abstraen los candados, la interaccion de la consola y EL TIEMPO del
 // Sistema Operativo directo. Ahora, dormir es una operacion controlada por
 // el multiplexor de entrada/salida (`io`). De esta forma, `io.sleep` puede
 // pausar un hilo, o puede pausar una Fibra/Corrutina sin bloquear la CPU.
 
 // -------------------------------------------------------------------------
-// HERRAMIENTA UTILIDAD: THREAD-SAFE PRINTER (ESTILO 0.16.0)
+// HERRAMIENTA UTILIDAD: THREAD-SAFE PRINTER (ESTILO 0.17.0)
 // -------------------------------------------------------------------------
 // Escribir a la consola (stdout) desde multiples hilos al mismo tiempo
 // corrompera la salida. Creamos un envoltorio seguro usando el nuevo Mutex.
 const ThreadSafePrinter = struct {
-    // En Zig 0.16 usamos el inicializador constante oficial del struct
+    // En Zig 0.17 usamos el inicializador constante oficial del struct
     mutex: std.Io.Mutex = std.Io.Mutex.init,
 
     pub fn print(self: *@This(), io: std.Io, comptime format: []const u8, args: anytype) void {
@@ -73,7 +73,7 @@ const ThreadSafePrinter = struct {
         self.mutex.lockUncancelable(io);
         defer self.mutex.unlock(io);
 
-        // Nuevo API de Impresion Zig 0.16.0: std.Io.File.stdout().writer()
+        // Nuevo API de Impresion Zig 0.17.0: std.Io.File.stdout().writer()
         // Requiere inyectar el contexto global `io` y un buffer temporal.
         var stdout_buffer: [4096]u8 = undefined;
         var stdout_writer = std.Io.File.stdout().writer(io, &stdout_buffer);
@@ -87,7 +87,7 @@ const ThreadSafePrinter = struct {
 // =========================================================================
 // PUNTO DE ENTRADA PRINCIPAL: EL NUEVO "JUICY MAIN"
 // =========================================================================
-// En Zig 0.16.0, la firma de `main` recibe el contexto de inicializacion
+// En Zig 0.17.0, la firma de `main` recibe el contexto de inicializacion
 // del proceso, el cual contiene la gran maquina `std.Io`.
 pub fn main(init: std.process.Init) !void {
     // Extraemos el orquestador global de I/O y concurrencia
@@ -95,7 +95,7 @@ pub fn main(init: std.process.Init) !void {
 
     var safe_out = ThreadSafePrinter{};
 
-    safe_out.print(io, "=== INICIO DE LA MASTERCLASS DE CONCURRENCIA ZIG 0.16 ===\n\n", .{});
+    safe_out.print(io, "=== INICIO DE LA MASTERCLASS DE CONCURRENCIA ZIG 0.17 ===\n\n", .{});
 
     try modulo1Basicos(io, &safe_out);
     try modulo2ExclusionMutua(io, &safe_out);
@@ -115,7 +115,7 @@ pub fn main(init: std.process.Init) !void {
 fn tareaModulo1(io: std.Io, id: u32, printer: *ThreadSafePrinter) void {
     printer.print(io, "  [Hilo Nativo {d}] Iniciando tarea basica...\n", .{id});
 
-    // CORRECCION ZIG 0.16: Dormir es una operacion I/O asincrona.
+    // CORRECCION ZIG 0.17: Dormir es una operacion I/O asincrona.
     // Usamos el reloj ".awake" (Monotonic) para garantizar precision.
     // Atrapamos cualquier error de cancelacion con `catch {}`.
     io.sleep(.{ .nanoseconds = 100 * std.time.ns_per_ms }, .awake) catch {};
@@ -147,7 +147,7 @@ fn modulo1Basicos(io: std.Io, printer: *ThreadSafePrinter) !void {
 // 3. MODULO 2: EXCLUSION MUTUA CON STD.IO.MUTEX
 // =========================================================================
 // Simulamos una cuenta bancaria compartida. Mostramos como proteger el
-// estado mediante la nueva API de Mutex de Zig 0.16.
+// estado mediante la nueva API de Mutex de Zig 0.17.
 
 const CuentaBancaria = struct {
     balance: u64 = 0,
@@ -255,7 +255,7 @@ fn modulo3SpinLockArtesanal(io: std.Io, printer: *ThreadSafePrinter) !void {
 // =========================================================================
 // 5. MODULO 4: PATRON SCATTER-GATHER (DISPERSAR Y REUNIR)
 // =========================================================================
-// En Zig 0.16.0, el patron nativo Multi-Hilo mas limpio para tareas de SO es
+// En Zig 0.17.0, el patron nativo Multi-Hilo mas limpio para tareas de SO es
 // crear un arreglo estatico de hilos, lanzarlos ("Scatter") y reunirlos
 // individualmente mediante un bucle ("Gather").
 
@@ -388,7 +388,7 @@ fn modulo7HilosDemonios(io: std.Io, printer: *ThreadSafePrinter) !void {
 }
 
 // =========================================================================
-// 9. CONCLUSIONES Y REGLAS DE ORO EN ZIG 0.16.0
+// 9. CONCLUSIONES Y REGLAS DE ORO EN ZIG 0.17.0
 // =========================================================================
 // 1. ABRACE STD.IO: "Writergate" acabo con `std.fs.File`. El 100% de la
 //    interaccion con consolas o archivos requiere instanciar constructos

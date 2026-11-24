@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 8: GESTION DE MEMORIA Y ALLOCATORS (EDICION ZIG 0.16)
+// MASTERCLASS 8: GESTION DE MEMORIA Y ALLOCATORS (EDICION ZIG 0.17)
 // =========================================================================
 
 // Zig no tiene Recolector de Basura (Garbage Collector) ni un "malloc" oculto.
@@ -9,7 +9,7 @@
 // CONCEPTOS CLAVE CUBIERTOS:
 // 1. Donde estan los bytes? (Stack vs Data Section vs Heap).
 // 2. Creacion vs Asignacion: create(*T) vs alloc([]T).
-// 3. DebugAllocator: El nuevo estandar de Zig 0.16 que reemplaza a GPA.
+// 3. DebugAllocator: El nuevo estandar de Zig 0.17 que reemplaza a GPA.
 // 4. FixedBufferAllocator (FBA): Asignacion ultra-rapida sin usar el SO.
 // 5. ArenaAllocator: El patron supremo para Videojuegos y Servidores Web.
 // 6. El error de memoria obligatorio: error.OutOfMemory.
@@ -17,7 +17,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -69,7 +69,7 @@ fn modulo1DondeEstanLosBytes(stdout: anytype) !void {
 fn modulo2DebugAllocator(stdout: anytype) !void {
     try stdout.print(">> Modulo 2: Debug Allocator (Deteccion de Fugas)\n", .{});
 
-    // En Zig 0.16.0, 'DebugAllocator' reemplaza al antiguo 'GeneralPurposeAllocator'.
+    // En Zig 0.17.0, 'DebugAllocator' reemplaza al antiguo 'GeneralPurposeAllocator'.
     // Al llamar a 'deinit()', este informara automaticamente de cualquier fuga en la consola.
     var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();

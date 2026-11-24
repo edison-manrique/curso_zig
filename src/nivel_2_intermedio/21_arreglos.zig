@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 6: ARREGLOS, MATRICES Y DESTRUCTURACION (EDICION ZIG 0.16)
+// MASTERCLASS 6: ARREGLOS, MATRICES Y DESTRUCTURACION (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, los Arrays (arreglos) son secuencias de longitud fija que se
@@ -20,7 +20,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -99,7 +99,7 @@ fn modulo2IteracionYMutabilidad(stdout: anytype) !void {
 // MODULO 3: OPERADORES COMPTIME (++ Y **)
 // -------------------------------------------------------------------------
 fn modulo3OperadoresComptime(stdout: anytype) !void {
-    try stdout.print(">> Modulo 3: Operadores Comptime (++ y **)\n", .{});
+    try stdout.print(">> Modulo 3: Operadores Comptime (++ y @splat)\n", .{});
 
     // 1. Concatenacion (++)
     // Funciona unicamente si los valores se conocen en tiempo de compilacion
@@ -110,14 +110,12 @@ fn modulo3OperadoresComptime(stdout: anytype) !void {
     // 2. Concatenacion de Strings (ya que son arreglos por debajo)
     const saludo_completo = "Zig" ++ " " ++ "Mola";
 
-    // 3. Repeticion (**)
-    const patron = "ab" ** 3;
-    const todo_ceros = [_]u8{0} ** 5; // Inicializa un arreglo de 5 elementos en 0
+    // 3. Repeticion (@splat en Zig 0.17.0, reemplaza a **)
+    const todo_ceros: [5]u8 = @splat(0); // Inicializa un arreglo de 5 elementos en 0
 
     try stdout.print("  Concatenacion Array (++): {any}\n", .{todos});
     try stdout.print("  Concatenacion String (++): {s}\n", .{saludo_completo});
-    try stdout.print("  Repeticion String (**): {s}\n", .{patron});
-    try stdout.print("  Todo Ceros (**): {any} (Tamano: {d})\n\n", .{ todo_ceros, todo_ceros.len });
+    try stdout.print("  Todo Ceros (@splat): {any} (Tamano: {d})\n\n", .{ todo_ceros, todo_ceros.len });
 }
 
 // -------------------------------------------------------------------------
@@ -148,12 +146,12 @@ fn modulo4InicializacionAvanzada(stdout: anytype) !void {
         break :init temporal;
     };
 
-    // Tambien se pueden llamar funciones repetidas con **
-    const puntos_repetidos = [_]Punto{crearPunto(5)} ** 2;
+    // Tambien se pueden inicializar arreglos repetidos con @splat (Zig 0.17.0)
+    const puntos_repetidos: [2]Punto = @splat(crearPunto(5));
 
     try stdout.print("  Array via bloque 'init' -> Punto 2 (x: {d}, y: {d})\n", .{ puntos_calculados[2].x, puntos_calculados[2].y });
 
-    try stdout.print("  Array via funcion con ** -> Punto 0 (x: {d}, y: {d})\n\n", .{ puntos_repetidos[0].x, puntos_repetidos[0].y });
+    try stdout.print("  Array via funcion con @splat -> Punto 0 (x: {d}, y: {d})\n\n", .{ puntos_repetidos[0].x, puntos_repetidos[0].y });
 }
 
 // -------------------------------------------------------------------------
@@ -169,7 +167,7 @@ fn modulo5Multidimensionales(stdout: anytype) !void {
     };
 
     // Inicializar una matriz a ceros de forma compacta
-    const todo_cero: [3][3]u8 = .{.{0} ** 3} ** 3;
+    const todo_cero: [3][3]u8 = @splat(@splat(0));
 
     try stdout.print("  matriz_2x3[1][2]: {d:.1}\n", .{matriz_2x3[1][2]});
     try stdout.print("  Matriz 3x3 generada en ceros: {any}\n", .{todo_cero});

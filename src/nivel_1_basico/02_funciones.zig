@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: FUNCIONES, EXPRESIONES Y EL PODER DE DEFER (EDICION ZIG 0.16)
+// MASTERCLASS: FUNCIONES, EXPRESIONES Y EL PODER DE DEFER (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, las funciones son predecibles y no contienen comportamiento oculto.
@@ -16,11 +16,11 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main" - Entrada con std.process.Init
+// ZIG 0.17.0: "Juicy Main" - Entrada con std.process.Init
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
-    // 1. I/O Explicito y robusto en Zig 0.16.0
+    // 1. I/O Explicito y robusto en Zig 0.17.0
     var buffer: [4096]u8 = undefined;
     var stdout_impl = std.Io.File.stdout().writer(io, &buffer);
     const stdout = &stdout_impl.interface;

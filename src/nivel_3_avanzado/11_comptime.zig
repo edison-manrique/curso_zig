@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: COMPTIME Y METAPROGRAMACION EN ZIG (EDICION 0.16.0)
+// MASTERCLASS: COMPTIME Y METAPROGRAMACION EN ZIG (EDICION 0.17.0)
 // =========================================================================
 // Todo el codigo, comentarios y diagramas estan escritos en ASCII puro
 // (7-bit, rango 0-127) para compatibilidad universal con terminales.
@@ -26,7 +26,7 @@ pub fn main(init: std.process.Init) !void {
     defer stdout.flush() catch {};
 
     try stdout.print("====================================================\n", .{});
-    try stdout.print("       MASTERCLASS: COMPTIME EN ZIG 0.16.0          \n", .{});
+    try stdout.print("       MASTERCLASS: COMPTIME EN ZIG 0.17.0          \n", .{});
     try stdout.print("====================================================\n\n", .{});
 
     try modulo1Genericos(stdout);
@@ -226,7 +226,7 @@ fn modulo5EstructurasGenericas(stdout: anytype) !void {
 
     // Instanciamos el contenedor especializado para buffers de bytes de solo lectura
     const ContenedorDeTexto = ContenedorGenerico([]const u8);
-    const instancia_txt = ContenedorDeTexto.inicializar("Zig Lang 0.16.0");
+    const instancia_txt = ContenedorDeTexto.inicializar("Zig Lang 0.17.0");
 
     try stdout.print("  Instancia 1 -> Tipo Interno: {s}, Valor: {d}\n", .{
         instancia_int.obtenerTipoNombre(),
@@ -272,7 +272,7 @@ const MiniLogger = struct {
                 @compileError("Los argumentos deben ser pasados como una tupla estructurada (usando '.{ ... }')");
             }
 
-            const cantidad_args = info_args.@"struct".fields.len;
+            const cantidad_args = info_args.@"struct".field_names.len;
 
             // Validacion de seguridad estatica
             if (cantidad_llaves < cantidad_args) {

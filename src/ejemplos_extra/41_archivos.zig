@@ -1,8 +1,8 @@
 // =========================================================================
-// MASTERCLASS 41: TRABAJO CON ARCHIVOS Y EL NUEVO std.Io (EDICION ZIG 0.16)
+// MASTERCLASS 41: TRABAJO CON ARCHIVOS Y EL NUEVO std.Io (EDICION ZIG 0.17)
 // =========================================================================
 
-// En Zig 0.16, todo el sistema de entrada/salida (I/O) fue completamente
+// En Zig 0.17, todo el sistema de entrada/salida (I/O) fue completamente
 // redisenado para alinearse con la filosofia explicita de los Allocators.
 // Se elimino el antiguo 'std.fs' global para dar paso al modulo 'std.Io'.
 //
@@ -23,7 +23,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
     const gpa = init.gpa;
@@ -33,7 +33,7 @@ pub fn main(init: std.process.Init) !void {
     const stdout = &stdout_impl.interface;
     defer stdout.flush() catch {};
 
-    try stdout.print("--- MASTERCLASS: GESTION DE ARCHIVOS EN ZIG 0.16 ---\n\n", .{});
+    try stdout.print("--- MASTERCLASS: GESTION DE ARCHIVOS EN ZIG 0.17 ---\n\n", .{});
 
     // Pasamos tanto la interfaz stdout como init.io y init.gpa para el trabajo
     try modulo1CreacionYEscritura(stdout, io);
@@ -51,7 +51,7 @@ pub fn main(init: std.process.Init) !void {
 fn modulo1CreacionYEscritura(stdout: anytype, io: std.Io) !void {
     try stdout.print(">> Modulo 1: Creacion y Escritura de Archivos\n", .{});
 
-    // En Zig 0.16, se usa std.Io.Dir para representar directorios.
+    // En Zig 0.17, se usa std.Io.Dir para representar directorios.
     // .cwd() nos devuelve un manejador del directorio de trabajo actual.
     const cwd = std.Io.Dir.cwd();
 
@@ -65,7 +65,7 @@ fn modulo1CreacionYEscritura(stdout: anytype, io: std.Io) !void {
     // Escribimos de forma secuencial (Streaming) sin necesidad de indicar offsets.
     // Esto es ideal para escrituras lineales rapidas y eficientes.
     try file.writeStreamingAll(io, "Linea 1: Hola desde la Masterclass de Archivos!\n");
-    try file.writeStreamingAll(io, "Linea 2: Zig 0.16 unifica todo el I/O en std.Io.\n");
+    try file.writeStreamingAll(io, "Linea 2: Zig 0.17 unifica todo el I/O en std.Io.\n");
     try file.writeStreamingAll(io, "Linea 3: Sin magia oculta detras del compilador.\n");
 
     try stdout.print("  Archivo 'temp_masterclass.txt' creado y escrito exitosamente.\n\n", .{});

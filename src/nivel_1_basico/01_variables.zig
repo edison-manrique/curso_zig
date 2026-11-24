@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: VARIABLES, CICLO DE VIDA, MEMORIA Y TIPOS (EDICION ZIG 0.16.0)
+// MASTERCLASS: VARIABLES, CICLO DE VIDA, MEMORIA Y TIPOS (EDICION ZIG 0.17.0)
 // =========================================================================
 // Todo el codigo, comentarios y diagramas estan escritos en ASCII puro
 // (7-bit, rango 0-127) para compatibilidad universal con terminales.
@@ -19,7 +19,7 @@
 // 8. Flotantes (IEEE 754), Booleans y Chars (Integers en Zig).
 // 9. Tuplas (Anonymous Structs) y Void (Zero Sized Types).
 // 10. Punteros (*T), Slices ([]T) y Fat Pointers.
-// 11. Casting Moderno en Zig 0.16.0 (Inferencia con @intCast y @floatFromInt).
+// 11. Casting Moderno en Zig 0.17.0 (Inferencia con @intCast y @floatFromInt).
 // 12. Semantica de Memoria: Paso por Valor vs Paso por Referencia.
 // 13. El Tipo de Retorno Imposible: noreturn.
 // 14. Proyecto Final: Procesador de Telemetria de Hardware Multi-hilo.
@@ -41,7 +41,7 @@ fn sumar_global(a: i32, b: i32) i32 {
 // threadlocal var no puede declararse como 'const'
 threadlocal var tls_variable: i32 = 1234;
 
-// Entrada del Sistema compatible con la edicion Zig 0.16.0 ("Juicy Main")
+// Entrada del Sistema compatible con la edicion Zig 0.17.0 ("Juicy Main")
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -292,7 +292,7 @@ fn modulo9SlicesYPointers(stdout: anytype) !void {
 }
 
 // -------------------------------------------------------------------------
-// MODULO 10: CASTING EN ZIG 0.16.0
+// MODULO 10: CASTING EN ZIG 0.17.0
 // -------------------------------------------------------------------------
 fn modulo10ConversionesSeguras(stdout: anytype) !void {
     try stdout.print("\n>> MODULO 10: Casting Moderno e Inferencia\n", .{});

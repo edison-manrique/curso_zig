@@ -1,5 +1,5 @@
 // =========================================================================
-// GUIA DE APRENDIZAJE: MODOS DE COMPILACION (EDICION ZIG 0.16.0)
+// GUIA DE APRENDIZAJE: MODOS DE COMPILACION (EDICION ZIG 0.17.0)
 // =========================================================================
 // En Zig, la forma en que se compila el codigo determina el balance entre:
 // 1. Velocidad de ejecucion (Runtime performance)
@@ -20,7 +20,7 @@
 const std = @import("std");
 const builtin = @import("builtin");
 
-// ZIG 0.16.0 MAIN: Estructura estandar de entrada con inyeccion de dependencias
+// ZIG 0.17.0 MAIN: Estructura estandar de entrada con inyeccion de dependencias
 pub fn main(init: std.process.Init) !void {
     // Obtenemos el subsistema de I/O inyectado por el entorno
     const io = init.io;
@@ -28,7 +28,7 @@ pub fn main(init: std.process.Init) !void {
     // Inicializamos un buffer de escritura de alto rendimiento para stdout
     var buffer: [16384]u8 = undefined;
 
-    // Usamos el nuevo std.Io (Notar la 'I' mayuscula del subsistema 0.16.0)
+    // Usamos el nuevo std.Io (Notar la 'I' mayuscula del subsistema 0.17.0)
     var stdout_impl = std.Io.File.stdout().writer(io, &buffer);
     const stdout = &stdout_impl.interface;
 
@@ -97,7 +97,7 @@ fn modulo2ConfiguracionBuild(stdout: anytype) !void {
     try stdout.print("  '-Doptimize=ReleaseFast', se utiliza la API 'std.Build'.\n\n", .{});
 
     const codigo_ejemplo =
-        \\  // Ejemplo de estructura tipica para build.zig en Zig 0.16.0:
+        \\  // Ejemplo de estructura tipica para build.zig en Zig 0.17.0:
         \\  const std = @import("std");
         \\
         \\  pub fn build(b: *std.Build) void {
@@ -174,7 +174,7 @@ fn modulo4DemostracionSeguridad(stdout: anytype) !void {
     try stdout.print("  Intentando sumar 1 a un u8 con valor de 255...\n", .{});
 
     // Evaluacion del comportamiento esperado segun el modo de optimizacion
-    if (builtin.mode == .Debug or builtin.mode == .ReleaseSafe) {
+    if (builtin.mode == .debug or builtin.mode == .safe) {
         try stdout.print("  Resultado esperado: El ejecutable detectara el desbordamiento\n", .{});
         try stdout.print("  y detendra la ejecucion inmediatamente con un Panic (Safety Check).\n", .{});
         try stdout.print("  [Ejecucion de la prueba de overflow omitida para evitar crash programado]\n", .{});

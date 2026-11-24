@@ -2,7 +2,7 @@
 // BUILTINS SISTEMA - COMPILE TIME (@compileError, @compileLog)
 // =========================================================================================
 // Herramientas de depuracion y control en tiempo de compilacion.
-// Nota: @inComptime fue removido en Zig 0.16.0 por ser redundante
+// Nota: @inComptime fue removido en Zig 0.17.0 por ser redundante
 // =========================================================================================
 
 const std = @import("std");
@@ -18,9 +18,9 @@ pub fn main(init: std.process.Init) !void {
     
     try stdout.print(">>> Builtins Sistema: Tiempo de Compilacion\n\n", .{});
     
-    // En Zig 0.16.0, @inComptime fue removido porque es redundante
+    // En Zig 0.17.0, @inComptime fue removido porque es redundante
     // Todo codigo dentro de un bloque 'comptime' ya esta en tiempo de compilacion
-    try stdout.print("  @inComptime: removido en Zig 0.16.0 (redundante)\n", .{});
+    try stdout.print("  @inComptime: removido en Zig 0.17.0 (redundante)\n", .{});
     try stdout.print("  Use bloques 'comptime {{ }}' para ejecutar codigo en compilacion\n\n", .{});
     
     // Ejemplo de bloque comptime

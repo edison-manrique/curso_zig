@@ -1,6 +1,6 @@
 // =========================================================================
 //           MASTERCLASS: MANIPULACION DE BITS Y OPERADORES BINARIOS
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como la guia de referencia definitiva
 // para dominar los operadores de bits (bitwise), desplazamientos seguros,

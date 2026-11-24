@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 9: STRINGS, UTF-8 Y TEXTO EN MEMORIA (EDICION ZIG 0.16.0)
+// MASTERCLASS 9: STRINGS, UTF-8 Y TEXTO EN MEMORIA (EDICION ZIG 0.17.0)
 // =========================================================================
 
 // En Zig, un String Literal es un puntero a un arreglo de bytes constante,
@@ -16,7 +16,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 

@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 6: ENUMERACIONES, SEGURIDAD Y REFLEXION (EDICION ZIG 0.16)
+// MASTERCLASS 6: ENUMERACIONES, SEGURIDAD Y REFLEXION (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, los Enums son conjuntos de constantes enteras fuertemente tipadas.
@@ -18,7 +18,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -190,12 +190,12 @@ fn modulo5ReflexionYMetaprogramacion(stdout: anytype) !void {
     // @typeInfo nos permite inspeccionar todo el struct/enum a nivel del compilador
     const info = @typeInfo(Planeta).@"enum"; // @"enum" porque 'enum' es palabra reservada
 
-    try stdout.print("  El enum Planeta tiene {d} campos. Son:\n", .{info.fields.len});
+    try stdout.print("  El enum Planeta tiene {d} campos. Son:\n", .{info.field_names.len});
 
     // Iteramos los campos del enum en TIEMPO DE COMPILACION (inline for)
-    // Esto es magia negra: el compilador escribira 4 lineas de 'try stdout.print' por ti.
-    inline for (info.fields, 0..) |campo, idx| {
-        try stdout.print("    {d}: {s} (Valor entero subyacente: {d})\n", .{ idx, campo.name, campo.value });
+    // En Zig 0.17.0, `lang.Type.Enum` usa `field_names` y `field_values`.
+    inline for (info.field_names, info.field_values, 0..) |nombre, valor, idx| {
+        try stdout.print("    {d}: {s} (Valor entero subyacente: {d})\n", .{ idx, nombre, valor });
     }
     try stdout.print("\n", .{});
 }

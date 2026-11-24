@@ -2,7 +2,7 @@
 // BUILTINS ATOMICOS - FENCE (Barreras de Memoria)
 // =========================================================================================
 // Barrera de memoria para ordenar operaciones atomicas.
-// En Zig 0.16.0, no existe std.atomic.fence ni @fence directamente.
+// En Zig 0.17.0, no existe std.atomic.fence ni @fence directamente.
 // Se usa @atomicRmw con operacion Noop para simular el efecto de fence.
 // =========================================================================================
 
@@ -21,7 +21,7 @@ pub fn main(init: std.process.Init) !void {
     
     var dato: u32 = 0;
     
-    // En Zig 0.16.0, usamos @atomicRmw con operacion Noop para simular fence acquire
+    // En Zig 0.17.0, usamos @atomicRmw con operacion Noop para simular fence acquire
     _ = @atomicRmw(u32, &dato, .Add, 0, .acquire);
     const valor = dato;
     

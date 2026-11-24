@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: TIEMPOS DE VIDA Y CICLOS DE MEMORIA (EDICION ZIG 0.16.0)
+// MASTERCLASS: TIEMPOS DE VIDA Y CICLOS DE MEMORIA (EDICION ZIG 0.17.0)
 // =========================================================================
 // Todo el codigo, comentarios y diagramas estan escritos en ASCII puro
 // (7-bit, rango 0-127) para compatibilidad universal con terminales.
@@ -33,7 +33,7 @@ pub fn main(init: std.process.Init) !void {
     // Liberamos el flujo de salida al finalizar el programa
     defer stdout.flush() catch {};
 
-    // En Zig 0.16.0, DebugAllocator es el estandar para rastreo de memoria en desarrollo
+    // En Zig 0.17.0, DebugAllocator es el estandar para rastreo de memoria en desarrollo
     var gpa = std.heap.DebugAllocator(.{}){};
     defer _ = gpa.deinit();
     const allocator = gpa.allocator();

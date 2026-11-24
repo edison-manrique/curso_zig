@@ -1,8 +1,8 @@
 // =========================================================================
-// MASTERCLASS: MANEJO DEL TIEMPO Y RENDIMIENTO (std.Io) - ZIG 0.16.0
+// MASTERCLASS: MANEJO DEL TIEMPO Y RENDIMIENTO (std.Io) - ZIG 0.17.0
 // =========================================================================
 //
-// FILOSOFÍA DEL TIEMPO EN ZIG 0.16.0 (Zero-Hidden-Control-Flow):
+// FILOSOFÍA DEL TIEMPO EN ZIG 0.17.0 (Zero-Hidden-Control-Flow):
 // "El tiempo ya no es mágico ni global. Es una interfaz de Entrada/Salida
 //  explícita. Todas las mediciones dependen del contexto `io`. Esto te da
 //  poder absoluto para inyectar relojes falsos en tests, o ejecutar tu código
@@ -21,12 +21,12 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
     // ==========================================
-    // MAGIA DE ZIG 0.16: I/O Estricto y Explicito
+    // MAGIA DE ZIG 0.17: I/O Estricto y Explicito
     // ==========================================
     // 1. Declaramos el tamaño del buffer en la pila (Ej. 8 KB)
     var buffer: [8192]u8 = undefined;
@@ -66,7 +66,7 @@ fn modulo_1_relojes(stdout: *std.Io.Writer, io: anytype) !void {
     const t_awake = std.Io.Clock.awake.now(io);
 
     // 2. RELOJ REAL (Wall-Clock)
-    // El mejor para fechas y logs. En Zig 0.16, se garantiza la entrega de un Timestamp
+    // El mejor para fechas y logs. En Zig 0.17, se garantiza la entrega de un Timestamp
     // (ya no es un Error Union, el compilador maneja las fallas del SO internamente).
     const t_real = std.Io.Clock.real.now(io);
 
@@ -74,7 +74,7 @@ fn modulo_1_relojes(stdout: *std.Io.Writer, io: anytype) !void {
     try stdout.print("  [Reloj Awake] Timestamp base (Nanosegundos crudos) : {d}\n", .{t_awake.toNanoseconds()});
     try stdout.print("  [Reloj Real]  Timestamp base (Nanosegundos crudos) : {d}\n", .{t_real.toNanoseconds()});
 
-    try stdout.print("  NOTA: En Zig 0.16.0, un Timestamp es solo una marca estatica inmutable.\n", .{});
+    try stdout.print("  NOTA: En Zig 0.17.0, un Timestamp es solo una marca estatica inmutable.\n", .{});
 }
 
 // =========================================================================
@@ -155,7 +155,7 @@ fn modulo_3_duraciones(stdout: *std.Io.Writer) !void {
 fn imprimirCabecera(stdout: *std.Io.Writer) !void {
     try stdout.print(
         \\====================================================================
-        \\  MASTERCLASS: MANEJO DEL TIEMPO (ZIG 0.16.0)
+        \\  MASTERCLASS: MANEJO DEL TIEMPO (ZIG 0.17.0)
         \\====================================================================
         \\
         \\
@@ -167,7 +167,7 @@ fn imprimirCierre(stdout: *std.Io.Writer) !void {
     // intente parsear y requiera argumentos adicionales de la tupla.
     try stdout.print(
         \\====================================================================
-        \\ RESUMEN DE RENDIMIENTO DE TIEMPO EN ZIG 0.16:
+        \\ RESUMEN DE RENDIMIENTO DE TIEMPO EN ZIG 0.17:
         \\ - No existen "Timers" magicos globales. Todo fluye por tu contexto 'io'.
         \\ - Usar siempre .awake para benchmarking y .real para timestamps de BBDD.
         \\ - El compilador ahora garantiza la entrega segura de Timestamps.

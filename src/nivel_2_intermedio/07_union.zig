@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 7: UNIONES Y VARIANTES (EDICION ZIG 0.16)
+// MASTERCLASS 7: UNIONES Y VARIANTES (EDICION ZIG 0.17)
 // =========================================================================
 
 // Las Uniones permiten que diferentes tipos de datos compartan el mismo
@@ -17,7 +17,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 

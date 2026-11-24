@@ -1,6 +1,6 @@
 // =========================================================================
 //           MASTERCLASS: INTEROPERABILIDAD CON C Y FFI (C-CALLS)
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como la guia de referencia definitiva
 // para dominar el uso de librerias de C, gestion de memoria cruzada,
@@ -23,7 +23,7 @@ const builtin = @import("builtin");
 const print = std.debug.print;
 
 // -------------------------------------------------------------------------
-// VALIDACION DE SEGURIDAD EN TIEMPO DE COMPILACION (Novedad Zig 0.16)
+// VALIDACION DE SEGURIDAD EN TIEMPO DE COMPILACION (Novedad Zig 0.17)
 // -------------------------------------------------------------------------
 comptime {
     if (!builtin.link_libc) {
@@ -37,12 +37,20 @@ comptime {
     }
 }
 
-const c = @cImport({
-    @cInclude("stdio.h");
-    @cInclude("stdlib.h");
-    @cInclude("string.h");
-    @cInclude("ctype.h");
-});
+// En Zig 0.17.0, `@cImport` fue eliminado del compilador (se usa el paquete
+// `translate-c` o declaraciones `extern "c"` directas como aqui).
+const c = struct {
+    extern "c" fn malloc(size: usize) ?*anyopaque;
+    extern "c" fn free(ptr: ?*anyopaque) void;
+    extern "c" fn strlen(s: [*:0]const u8) usize;
+    extern "c" fn getenv(name: [*:0]const u8) ?[*:0]const u8;
+    extern "c" fn qsort(
+        base: ?*anyopaque,
+        nmemb: usize,
+        size: usize,
+        compar: *const fn (?*const anyopaque, ?*const anyopaque) callconv(.c) c_int,
+    ) void;
+};
 
 // =========================================================================
 // 1. IMPORTACION DE CABECERAS Y TIPOS PRIMITIVOS

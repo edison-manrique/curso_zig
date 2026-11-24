@@ -1,8 +1,8 @@
 // =========================================================================
-// MASTERCLASS: GESTION DE ERRORES EN ZIG (EDICION 0.16.0)
+// MASTERCLASS: GESTION DE ERRORES EN ZIG (EDICION 0.17.0)
 // =========================================================================
 // Esta guia cubre desde los fundamentos de bajo nivel hasta los patrones
-// avanzados de recuperacion y control de flujo de errores en Zig 0.16.0.
+// avanzados de recuperacion y control de flujo de errores en Zig 0.17.0.
 // Todo el codigo e instrucciones estan disenados en ASCII puro (7-bit)
 // para maxima compatibilidad con cualquier consola y editor del mundo.
 //
@@ -30,7 +30,7 @@ pub fn main(init: std.process.Init) !void {
     defer stdout.flush() catch {};
 
     try stdout.print("====================================================\n", .{});
-    try stdout.print("         MASTERCLASS: ERRORES EN ZIG 0.16.0         \n", .{});
+    try stdout.print("         MASTERCLASS: ERRORES EN ZIG 0.17.0         \n", .{});
     try stdout.print("====================================================\n\n", .{});
 
     try modulo1ErrorSets(stdout);
@@ -209,10 +209,9 @@ fn conectarBaseDeDatos(falla_al_final: bool, stdout: anytype) ErroresDeRecurso!v
         base_de_datos_mock_conectada = false;
     }
 
-    // Solucion a error 'error set is discarded': Consumimos el error capturado
-    // imprimiendolo en consola en lugar de descartarlo con un identificador vacio.
-    errdefer |err| {
-        stdout.print("    [errdefer Telemetria] Database rollback activado por error: {any}\n", .{err}) catch {};
+    // En Zig 0.17.0 se elimino la captura `|err|` en `errdefer`.
+    errdefer {
+        stdout.print("    [errdefer Telemetria] Database rollback activado por error\n", .{}) catch {};
     }
 
     if (falla_al_final) {
@@ -366,10 +365,9 @@ fn procesarTransaccion(tx: Transaccion, stdout: anytype) ErrorDeProcesamiento!vo
     // 1. Iniciamos logica y establecemos reversiones automaticas ante errores
     try verificarTarjeta(tx.numero_tarjeta);
 
-    // Solucion a error 'error set is discarded': Consumimos el error de la
-    // pasarela guardando un registro inmediato en las metricas/logs de consola.
-    errdefer |err| {
-        stdout.print("    [errdefer Telemetria] Fallo de pasarela en transaccion {d}: {any}\n", .{ tx.id, err }) catch {};
+    // En Zig 0.17.0 se elimino la captura `|err|` en `errdefer`.
+    errdefer {
+        stdout.print("    [errdefer Telemetria] Fallo de pasarela en transaccion {d}\n", .{tx.id}) catch {};
     }
 
     try autorizarMonto(tx.monto_usd);

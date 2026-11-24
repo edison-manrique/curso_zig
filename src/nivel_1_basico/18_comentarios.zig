@@ -1,6 +1,6 @@
 // =========================================================================
 //         GUIA DEFINITIVA: COMENTARIOS Y AUTODOCUMENTACION EN ZIG
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como un curso intensivo y de nivel
 // produccion para dominar la sintaxis de comentarios, reglas de analisis
@@ -145,7 +145,7 @@ const Coordenada = struct {
 // y no afectaran la fusion de las lineas de documentacion continua.
 
 /// Esta estructura simula una conexion de base de datos activa.
-// NOTA DE DESARROLLO: Esta implementacion es temporal para la version 0.16.0
+// NOTA DE DESARROLLO: Esta implementacion es temporal para la version 0.17.0
 /// Permite enviar cadenas de texto simulando consultas complejas.
 const DBConnection = struct {
     id: u32,

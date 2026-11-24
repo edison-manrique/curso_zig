@@ -17,7 +17,7 @@ pub fn main(init: std.process.Init) !void {
     
     try stdout.print(">>> Builtins Memoria: @memset (Llenado de Memoria)\n\n", .{});
     
-    var buffer_destino = [_]u8{0} ** 8;
+    var buffer_destino: [8]u8 = @splat(0);
     @memset(&buffer_destino, 42); // 42 = caracter '*'
     
     try stdout.print("  Buffer llenado: {s}\n\n", .{buffer_destino});

@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 40: RESULT LOCATION SEMANTICS (EDICION ZIG 0.16)
+// MASTERCLASS 40: RESULT LOCATION SEMANTICS (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, la inferencia de tipos y la asignacion de memoria no son detalles
@@ -23,7 +23,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 

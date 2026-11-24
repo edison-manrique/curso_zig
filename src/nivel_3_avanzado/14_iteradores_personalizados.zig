@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: ITERADORES PERSONALIZADOS (EDICION ZIG 0.16.0)
+// MASTERCLASS: ITERADORES PERSONALIZADOS (EDICION ZIG 0.17.0)
 // =========================================================================
 // Todo el codigo, comentarios y diagramas estan escritos en ASCII puro
 // (7-bit, rango 0-127) para compatibilidad universal con terminales.

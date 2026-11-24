@@ -1,6 +1,6 @@
 // =========================================================================
 //       MASTERCLASS: IDENTIFICADORES Y IDENTIFICADORES DE CADENA
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como la guia definitiva escrita por
 // expertos en sistemas para dominar las reglas de nomenclatura, enlaces de
@@ -169,13 +169,10 @@ const EstadoHttp = enum {
 fn obtenerCampoDinamico(instancia: anytype, comptime nombre_campo: []const u8) void {
     const info = @typeInfo(@TypeOf(instancia));
 
-    // CORRECCION ZIG 0.16.0: El compilador exige usar minusculas para reflejar
-    // tipos (`struct`, `union`, `enum`). Dado que `struct` es una palabra
-    // reservada, la API de Zig se diseno usando la sintaxis de identificador
-    // de cadena obligatorio: `info.@"struct"`.
-    inline for (info.@"struct".fields) |f| {
-        if (std.mem.eql(u8, f.name, nombre_campo)) {
-            const valor = @field(instancia, f.name);
+    // En Zig 0.17.0, `lang.Type.Struct` usa `field_names` (SoA) en lugar de `fields`.
+    inline for (info.@"struct".field_names) |nombre| {
+        if (std.mem.eql(u8, nombre, nombre_campo)) {
+            const valor = @field(instancia, nombre);
             std.debug.print("    [Metaprogramacion] Campo encontrado '{s}' -> Valor: {any}\n", .{ nombre_campo, valor });
             return;
         }
@@ -240,7 +237,7 @@ fn demostracionHttp() void {
     const cabeceras_recibidas = CabecerasHttp{
         .@"Content-Type" = "application/json",
         .@"Content-Length" = 1024,
-        .@"User-Agent" = "Mozilla/5.0 (ZigOS 0.16.0)",
+        .@"User-Agent" = "Mozilla/5.0 (ZigOS 0.17.0)",
         .Authorization = "Bearer token_secreto_abc123",
         .@"X-Custom-Header" = "Metaprogramacion_Zig_Habilitada",
     };

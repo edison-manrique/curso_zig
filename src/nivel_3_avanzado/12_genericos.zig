@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: GENERICOS Y METAPROGRAMACION (EDICION ZIG 0.16.0)
+// MASTERCLASS: GENERICOS Y METAPROGRAMACION (EDICION ZIG 0.17.0)
 // =========================================================================
 // Todo el codigo, comentarios y diagramas estan escritos en ASCII puro
 // (7-bit, rango 0-127) para compatibilidad universal con terminales.
@@ -68,7 +68,7 @@ fn modulo1FuncionesGenericas(stdout: anytype) !void {
 // -------------------------------------------------------------------------
 // MODULO 2: ESTRUCTURAS GENERICAS (El patron de fabrica de tipos)
 // -------------------------------------------------------------------------
-// En Zig 0.16.0, std.ArrayList(T) es una estructura de datos no gestionada
+// En Zig 0.17.0, std.ArrayList(T) es una estructura de datos no gestionada
 // (unmanaged) que requiere que le proveamos el Allocator en cada operacion.
 // Creamos una envoltura "Pila(T)" que almacena el Allocator para simplificar su uso.
 fn Pila(comptime T: type) type {
@@ -80,9 +80,9 @@ fn Pila(comptime T: type) type {
 
         pub fn init(allocator: std.mem.Allocator) Self {
             return .{
-                // CORRECCION SINTACTICA ZIG 0.16.0:
+                // CORRECCION SINTACTICA ZIG 0.17.0:
                 // Al no tener valores por defecto, inicializamos explicitamente la lista vacia.
-                .items = .{ .items = &.{}, .capacity = 0 },
+                .items = .empty,
                 .allocator = allocator,
             };
         }
@@ -98,7 +98,7 @@ fn Pila(comptime T: type) type {
         }
 
         pub fn pop(self: *Self) ?T {
-            // CORRECCION ZIG 0.16.0:
+            // CORRECCION ZIG 0.17.0:
             // El metodo correcto es '.pop()', el cual devuelve un tipo opcional '?T'
             return self.items.pop();
         }

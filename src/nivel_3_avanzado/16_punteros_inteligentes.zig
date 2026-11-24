@@ -1,6 +1,6 @@
 // =========================================================================
 //           MASTERCLASS: GESTION DE MEMORIA Y PUNTEROS INTELIGENTES
-//                         EDICION ZIG 0.16.0
+//                         EDICION ZIG 0.17.0
 // =========================================================================
 // Este documento ha sido disenado como una guia definitiva escrita por
 // expertos en sistemas para dominar el control explicito de memoria en Zig.
@@ -151,7 +151,7 @@ fn Unique(comptime T: type) type {
 // Estas instrucciones garantizan que la operacion de lectura-modificacion-escritura
 // se realice en un solo ciclo ininterrumpido a nivel de hardware.
 //
-// En Zig 0.16.0, esto se logra mediante:
+// En Zig 0.17.0, esto se logra mediante:
 // - `@atomicRmw(T, ptr, op, val, ordering)`: Realiza una modificacion atomica.
 // - `@atomicLoad(T, ptr, ordering)`: Lee un valor de forma sincronizada.
 //
@@ -163,7 +163,7 @@ fn Unique(comptime T: type) type {
 // 5. IMPLEMENTACION DEL CONTENEDOR SHARED(T) (THREAD-SAFE & LEAK-FREE)
 // =========================================================================
 // Esta es la implementacion robusta, profesional y segura para entornos de
-// produccion concurrentes de un Shared Pointer en Zig 0.16.0.
+// produccion concurrentes de un Shared Pointer en Zig 0.17.0.
 
 pub fn Shared(comptime T: type) type {
     return struct {

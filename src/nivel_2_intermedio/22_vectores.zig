@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS: VECTORES Y HARDWARE SIMD (EDICION ZIG 0.16.0)
+// MASTERCLASS: VECTORES Y HARDWARE SIMD (EDICION ZIG 0.17.0)
 // =========================================================================
 // En Zig, un Vector no es un arreglo dinamico (como std::vector en C++).
 // Un Vector en Zig es una abstraccion directa para hardware SIMD
@@ -18,7 +18,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0 JUICY MAIN: El nuevo estandar de entrada con inyeccion de dependencias
+// ZIG 0.17.0 JUICY MAIN: El nuevo estandar de entrada con inyeccion de dependencias
 pub fn main(init: std.process.Init) !void {
     // Obtenemos el subsistema de I/O inyectado por el entorno
     const io = init.io;
@@ -26,7 +26,7 @@ pub fn main(init: std.process.Init) !void {
     // Inicializamos un buffer de escritura de alto rendimiento para stdout
     var buffer: [16384]u8 = undefined;
 
-    // Usamos el nuevo std.Io (Notar la 'I' mayuscula del nuevo subsistema 0.16.0)
+    // Usamos el nuevo std.Io (Notar la 'I' mayuscula del nuevo subsistema 0.17.0)
     var stdout_impl = std.Io.File.stdout().writer(io, &buffer);
     const stdout = &stdout_impl.interface;
 
@@ -34,7 +34,7 @@ pub fn main(init: std.process.Init) !void {
     defer stdout.flush() catch {};
 
     try stdout.print("====================================================\n", .{});
-    try stdout.print("     MASTERCLASS: VECTORES (SIMD) EN ZIG 0.16.0     \n", .{});
+    try stdout.print("     MASTERCLASS: VECTORES (SIMD) EN ZIG 0.17.0     \n", .{});
     try stdout.print("====================================================\n\n", .{});
 
     try modulo1CreacionYOperaciones(stdout);

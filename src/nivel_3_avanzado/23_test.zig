@@ -1,9 +1,9 @@
 // =========================================================================================
-// THE ZIG 0.16.0 MASTERCLASS: EL ARTE DEL TESTING Y QA EN SISTEMAS DE BAJO NIVEL
+// THE ZIG 0.17.0 MASTERCLASS: EL ARTE DEL TESTING Y QA EN SISTEMAS DE BAJO NIVEL
 // =========================================================================================
 //
 // Autor: Zig AI Masterclass Series
-// Version: Zig 0.16.0 (Juicy Main Edition)
+// Version: Zig 0.17.0 (Juicy Main Edition)
 // Encoding: 7-bit ASCII
 //
 // DESCRIPCION:
@@ -42,7 +42,7 @@ const expectEqualSlices = testing.expectEqualSlices;
 const expectError = testing.expectError;
 
 // =========================================================================================
-// "JUICY MAIN" (ZIG 0.16.0) - EL MOTOR DEL MODO LECTURA
+// "JUICY MAIN" (ZIG 0.17.0) - EL MOTOR DEL MODO LECTURA
 // =========================================================================================
 // Este bloque solo se ejecuta cuando usas `zig run`.
 // Cuando usas `zig test`, Zig ignora todo el main y busca la palabra clave `test`.
@@ -124,7 +124,7 @@ test "Modulo 2: Comparando Strings (expectEqualStrings)" {
 test "Modulo 2: Comparando Slices y Arrays (expectEqualSlices)" {
     const esperados = [_]u8{ 10, 20, 30 };
 
-    var dinamico = [_]u8{0} ** 3;
+    var dinamico: [3]u8 = @splat(0);
     dinamico[0] = 10;
     dinamico[1] = 20;
     dinamico[2] = 30;
@@ -215,13 +215,13 @@ test "Modulo 4: allocator de testing seguro" {
 test "Modulo 4: Memory Leak en estructuras dinamicas" {
     const gpa = std.testing.allocator;
 
-    var lista = std.ArrayList(u8).init(gpa);
+    var lista: std.ArrayList(u8) = .empty;
     // IMPORTANTE: En los tests, siempre usa defer para limpiar
-    defer lista.deinit();
+    defer lista.deinit(gpa);
 
-    try lista.append('Z');
-    try lista.append('I');
-    try lista.append('G');
+    try lista.append(gpa, 'Z');
+    try lista.append(gpa, 'I');
+    try lista.append(gpa, 'G');
 
     try expectEqualStrings("ZIG", lista.items);
 }
@@ -522,7 +522,7 @@ fn imprimirCabecera(stdout: anytype) !void {
         \\     / / | | (_ |      | | | _|\__ \ | |  | || .` | (_ |
         \\    /___|___\___|      |_| |___|___/ |_| |___|_|\_|\___|
         \\                                                            
-        \\    MASTERCLASS DEFINITIVA: ZIG 0.16.0 (EDICION JUICY MAIN)
+        \\    MASTERCLASS DEFINITIVA: ZIG 0.17.0 (EDICION JUICY MAIN)
         \\====================================================================
         \\ Bienvenido a la guia interactiva. Este archivo es un hibrido:
         \\ Es un programa de consola y una suite de pruebas simultaneamente.

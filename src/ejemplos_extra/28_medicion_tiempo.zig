@@ -1,10 +1,10 @@
-// Zig Release Version: 0.16.0
+// Zig Release Version: 0.17.0
 // Tema: Medición de Tiempo y Nuevas APIs de I/O
 // Nivel: Intermedio/Avanzado
 
 const std = @import("std");
 
-/// Función auxiliar para crear un writer con buffer explícito (Patrón Zig 0.16.0)
+/// Función auxiliar para crear un writer con buffer explícito (Patrón Zig 0.17.0)
 pub fn generateStdOut(init: std.process.Init) std.Io.Writer {
     // 1. Tú declaras el tamaño del buffer de memoria (ej. 4 KB)
     var buffer: [4096]u8 = undefined;
@@ -22,7 +22,7 @@ pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
     // ==========================================
-    // MAGIA DE ZIG 0.16: I/O Explícito
+    // MAGIA DE ZIG 0.17: I/O Explícito
     // En versiones anteriores, std.io.getStdOut() era implícito.
     // Ahora tú tienes el control total sobre la memoria del buffer.
     // ==========================================

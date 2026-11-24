@@ -1,5 +1,5 @@
 // =========================================================================
-// MASTERCLASS 3: BUCLES Y ESTRUCTURAS DE REPETICION (EDICION ZIG 0.16)
+// MASTERCLASS 3: BUCLES Y ESTRUCTURAS DE REPETICION (EDICION ZIG 0.17)
 // =========================================================================
 
 // En Zig, los bucles son potentes y flexibles. Introducen conceptos unicos
@@ -15,7 +15,7 @@
 
 const std = @import("std");
 
-// ZIG 0.16.0: "Juicy Main"
+// ZIG 0.17.0: "Juicy Main"
 pub fn main(init: std.process.Init) !void {
     const io = init.io;
 
@@ -70,12 +70,12 @@ fn modulo1BucleWhile(stdout: anytype) !void {
 }
 
 // -------------------------------------------------------------------------
-// MODULO 2: EL NUEVO BUCLE `for` DE ZIG 0.16.0
+// MODULO 2: EL NUEVO BUCLE `for` DE ZIG 0.17.0
 // -------------------------------------------------------------------------
 fn modulo2BucleFor(stdout: anytype) !void {
     try stdout.print(">> Modulo 2: for Moderno (Rangos, Multiples y Referencias)\n", .{});
 
-    // 1. Iterar sobre un rango puro (muy usado en Zig 0.16 en lugar de while)
+    // 1. Iterar sobre un rango puro (muy usado en Zig 0.17 en lugar de while)
     try stdout.print("  [for con rangos puros 0..3]: ", .{});
     for (0..3) |idx| {
         try stdout.print("{d} ", .{idx});
